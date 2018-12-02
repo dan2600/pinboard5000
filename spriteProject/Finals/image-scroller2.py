@@ -1,0 +1,64 @@
+#!/usr/bin/env python
+import time
+import serial
+from samplebase import SampleBase
+from PIL import Image
+ser = serial.Serial('/dev/ttyUSB0', 9600)
+time.sleep(5)
+
+class ImageScroller(SampleBase):
+    def __init__(self, *args, **kwargs):
+        super(ImageScroller, self).__init__(*args, **kwargs)
+        self.parser.add_argument("-i", "--image", help="The image to display", default="../../../examples-api-use/runtext.ppm")
+
+    def run(self):
+        if not 'image' in self.__dict__:
+            self.image = Image.open(self.args.image).convert('RGB')
+        self.image.resize((self.matrix.width, self.matrix.height), Image.ANTIALIAS)
+
+        double_buffer = self.matrix.CreateFrameCanvas()
+	
+
+        img_width, img_height = self.image.size
+      
+
+
+        # let's scroll
+        xpos = 0
+        while True:
+            self.image = Image.open(self.args.image).convert('RGB')
+            self.image.resize((self.matrix.width, self.matrix.height), Image.ANTIALIAS)
+	    double_buffer.SetImage(self.image)
+	    ser.write("STREET FIGHTER 2\n")  
+            self.matrix.SwapOnVSync(double_buffer)
+	    time.sleep(5)
+	    self.image = Image.open("coins.bmp").convert('RGB')
+	    self.image.resize((self.matrix.width, self.matrix.height), Image.ANTIALIAS)
+	    double_buffer.SetImage(self.image)
+	    ser.write("JOHNY PINBALL\n")  
+            self.matrix.SwapOnVSync(double_buffer)
+	    time.sleep(5)
+	    self.image = Image.open("insertcoin.bmp").convert('RGB')
+	    self.image.resize((self.matrix.width, self.matrix.height), Image.ANTIALIAS)
+	    double_buffer.SetImage(self.image)
+	    ser.write("INSERT COIN\n")  
+            self.matrix.SwapOnVSync(double_buffer)
+	    time.sleep(5)
+	    self.image = Image.open("MAGFESTLOGO.bmp").convert('RGB')
+	    self.image.resize((self.matrix.width, self.matrix.height), Image.ANTIALIAS)
+	    double_buffer.SetImage(self.image)
+	    ser.write("MAG FEST 2019\n")  
+            self.matrix.SwapOnVSync(double_buffer)
+	    time.sleep(5)
+
+
+
+
+# Main function
+# e.g. call with
+#  sudo ./image-scroller.py --chain=4
+# if you have a chain of four
+if __name__ == "__main__":
+    image_scroller = ImageScroller()
+    if (not image_scroller.process()):
+        image_scroller.print_help()
