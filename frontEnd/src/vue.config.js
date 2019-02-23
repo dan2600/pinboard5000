@@ -1,12 +1,12 @@
 module.exports = {
 	 configureWebpack: {
-  entry: {
-    app: './main.js',
-  },
-  optimization: {
-     splitChunks: {
-       chunks: 'all'
-     }
-   }
-}
+		entry: {
+			app: './main.js',
+		},
+		optimization: {
+			splitChunks: {
+				chunks: 'all'
+			}
+		}
+	}
 }

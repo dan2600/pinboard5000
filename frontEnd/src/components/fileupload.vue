@@ -28,8 +28,8 @@ export default {
 			segmentData: null,
 			graphicList: null,
 			saved: true,
-			selected: "",
-			selectValue: "",
+			selected: '',
+			selectValue: '',
 			uploadReady: true,
 			file: '',
 			filesource: null,
@@ -37,11 +37,11 @@ export default {
 		}
 	},
 	mounted: function() {
-		this.axios.get(process.env.VUE_APP_WEB_URL + "/images").then((response) => {
+		this.axios.get(process.env.VUE_APP_WEB_URL + '/images').then((response) => {
 			this.graphicList = response.data
 
 		})
-		window.console.log("shits")
+		window.console.log('shits')
 
 	},
 	methods: {
@@ -50,7 +50,7 @@ export default {
 
 			this.$nextTick(() => {
 				this.loadingimg = true
-				this.filesource = "http://localhost:2600/images/" + this.selectValue
+				this.filesource = 'http://localhost:2600/images/' + this.selectValue
 			})
 		},
 		loaded: function() {},
@@ -61,7 +61,7 @@ export default {
 		deleteGraphic: function() {
 
 			if (this.selectValue != null) {
-				this.axios.get(process.env.VUE_APP_WEB_URL + "/deleteImage?name=" + encodeURIComponent(this.selectValue)).then((response) => {
+				this.axios.get(process.env.VUE_APP_WEB_URL + '/deleteImage?name=' + encodeURIComponent(this.selectValue)).then((response) => {
 					this.graphicList = response.data
 				})
 			}
@@ -70,7 +70,7 @@ export default {
 			var selfie = this
 			let formData = new FormData();
 			formData.append('file', this.file);
-			this.axios.post(process.env.VUE_APP_WEB_URL + "/imageupload", formData, {
+			this.axios.post(process.env.VUE_APP_WEB_URL + '/imageupload', formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data'
 				}

@@ -62,31 +62,31 @@ export default {
 	name: 'sceneSelect',
 	data: function() {
 		return {
-			sceneData: { name: "" },
+			sceneData: { name: '' },
 			graphicList: null,
 			imageFiles: null,
 			saved: true,
-			selected: "",
-			selectValue: "",
-			imageValue: "",
+			selected: '',
+			selectValue: '',
+			imageValue: '',
 			selectedImage: null,
 			loadingimg: false,
-			imageData: "",
-			segmentList: "",
-			animator: "",
-			currentFrame: "",
+			imageData: '',
+			segmentList: '',
+			animator: '',
+			currentFrame: '',
 		}
 	},
 	mounted: function() {
-		this.axios.get(process.env.VUE_APP_WEB_URL + "/scene").then((response) => {
+		this.axios.get(process.env.VUE_APP_WEB_URL + '/scene').then((response) => {
 			this.graphicList = response.data
 
 		})
-		this.axios.get(process.env.VUE_APP_WEB_URL + "/images").then((response) => {
+		this.axios.get(process.env.VUE_APP_WEB_URL + '/images').then((response) => {
 			this.imageFiles = response.data
 		})
 
-		this.axios.get(process.env.VUE_APP_WEB_URL + "/segments").then((response) => {
+		this.axios.get(process.env.VUE_APP_WEB_URL + '/segments').then((response) => {
 			this.segmentList = response.data
 		})
 	},
@@ -97,7 +97,7 @@ export default {
 			this.loadingimg = false
 			this.$nextTick(() => {
 				this.loadingimg = true
-				this.selectedImage = process.env.VUE_APP_WEB_URL + "/../images/" + this.sceneData.imageFile
+				this.selectedImage = process.env.VUE_APP_WEB_URL + '/../images/' + this.sceneData.imageFile
 			})
 		},
 		gifAnimate: function() {
@@ -131,7 +131,7 @@ export default {
 			})
 		},
 		changeItem: function(valueChange) {
-			this.axios.get(process.env.VUE_APP_WEB_URL + "/scene?name=" + valueChange).then((response) => {
+			this.axios.get(process.env.VUE_APP_WEB_URL + '/scene?name=' + valueChange).then((response) => {
 				this.sceneData = response.data[0]
 				if (this.sceneData.imageFile) {
 					this.changeGif()
@@ -146,7 +146,7 @@ export default {
 					self.graphicList = response.data
 				})
 				.catch(function(error) {
-					alert("error" + error)
+					alert('error' + error)
 				})
 			this.saved = true
 			this.selectValue = this.sceneData.name
@@ -158,8 +158,8 @@ export default {
 		},
 		deleteThis: function() {
 			let self = this
-			this.axios.get(process.env.VUE_APP_WEB_URL + "/scene/delete?name=" + this.selectValue).then(() => {
-				this.axios.get(process.env.VUE_APP_WEB_URL + "/scene").then((response) => {
+			this.axios.get(process.env.VUE_APP_WEB_URL + '/scene/delete?name=' + this.selectValue).then(() => {
+				this.axios.get(process.env.VUE_APP_WEB_URL + '/scene').then((response) => {
 					this.graphicList = response.data
 					this.loadingimg = false
 					self.makeNew()

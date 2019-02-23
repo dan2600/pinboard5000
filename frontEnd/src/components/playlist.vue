@@ -26,85 +26,85 @@
 </template>
 <script>
 export default {
-    name: 'homePage',
-    data: function() {
-        return {
-            url: process.env.VUE_APP_WEB_URL,
-            playlistData: null,
-            imagePreviews: [],
-            graphicList: null,
-            saved: true,
-        }
-    },
+	name: 'homePage',
+	data: function() {
+		return {
+			url: process.env.VUE_APP_WEB_URL,
+			playlistData: null,
+			imagePreviews: [],
+			graphicList: null,
+			saved: true,
+		}
+	},
 
-    mounted: function() {
-        this.axios.get(process.env.VUE_APP_WEB_URL + "/scene").then((response) => {
-            this.graphicList = response.data
-            this.axios.get(process.env.VUE_APP_WEB_URL + "/playlist").then((response) => {
-                this.playlistData = response.data
-                for (this.i = 0; this.i < this.playlistData.length; this.i++) {
-                    for (this.z = 0; this.z < this.graphicList.length; this.z++) {
-                        if (this.playlistData[this.i].graphic == this.graphicList[this.z].name) {
-                            window.console.log(this.graphicList[this.z].imageFile)
-                            this.playlistData[this.i].url = this.url + '/../images/' + this.graphicList[this.z].imageFile
-                        }
-                    }
-                }
-            })
-        })
+	mounted: function() {
+		this.axios.get(process.env.VUE_APP_WEB_URL + '/scene').then((response) => {
+			this.graphicList = response.data
+			this.axios.get(process.env.VUE_APP_WEB_URL + '/playlist').then((response) => {
+				this.playlistData = response.data
+				for (this.i = 0; this.i < this.playlistData.length; this.i++) {
+					for (this.z = 0; this.z < this.graphicList.length; this.z++) {
+						if (this.playlistData[this.i].graphic == this.graphicList[this.z].name) {
+							window.console.log(this.graphicList[this.z].imageFile)
+							this.playlistData[this.i].url = this.url + '/../images/' + this.graphicList[this.z].imageFile
+						}
+					}
+				}
+			})
+		})
 
-    },
-    methods: {
-        setImage: function(image, index) {
+	},
+	methods: {
+		setImage: function(image, index) {
 
-            this.playlistData[index].url = this.url + '/../images/' + image
-        },
-        addEntry: function() {
-            this.playlistData.push({ "id": this.playlistData.length, "graphic": "New" })
-        },
-        saveChanges: function() {
-            this.axios.post(process.env.VUE_APP_WEB_URL + "/playlist/update", { data: JSON.stringify(this.playlistData) })
-                .then((response) => {
-                    this.playlistData = response.data
-            for (this.i = 0; this.i < this.playlistData.length; this.i++) {
-                for (this.z = 0; this.z < this.graphicList.length; this.z++) {
-                    if (this.playlistData[this.i].graphic == this.graphicList[this.z].name) {
-                        window.console.log(this.graphicList[this.z].imageFile)
-                        this.playlistData[this.i].url = this.url + '/../images/' + this.graphicList[this.z].imageFile
-                    }
-                }
-            }
+			this.playlistData[index].url = this.url + '/../images/' + image
+		},
+		addEntry: function() {
+			this.playlistData.push({ 'id': this.playlistData.length, 'graphic': 'New' })
+		},
+		saveChanges: function() {
+			this.axios.post(process.env.VUE_APP_WEB_URL + '/playlist/update', { data: JSON.stringify(this.playlistData) })
+				.then((response) => {
+					this.playlistData = response.data
+					for (this.i = 0; this.i < this.playlistData.length; this.i++) {
+						for (this.z = 0; this.z < this.graphicList.length; this.z++) {
+							if (this.playlistData[this.i].graphic == this.graphicList[this.z].name) {
+								window.console.log(this.graphicList[this.z].imageFile)
+								this.playlistData[this.i].url = this.url + '/../images/' + this.graphicList[this.z].imageFile
+							}
+						}
+					}
 
-                })
-                .catch((error) => {
-                    alert("error" + error)
-                })
-            this.saved = true
-        },
-        updateValue: function(e) {
-            alert(e)
-            this.playlistData[parseInt(e.target.id)].graphic = e.target.value
-        },
-        removeRow: function(id) {
-            this.playlistData.splice(id, 1)
-            for (var i = 0; i < this.playlistData.length; i++) {
-                this.playlistData[i].id = i
-            }
-            this.saved = false
-        },
-        updateChoice(index, value, imageFile) {
+				})
+				.catch((error) => {
+					alert('error' + error)
+				})
+			this.saved = true
+		},
+		updateValue: function(e) {
+			alert(e)
+			this.playlistData[parseInt(e.target.id)].graphic = e.target.value
+		},
+		removeRow: function(id) {
+			this.playlistData.splice(id, 1)
+			for (var i = 0; i < this.playlistData.length; i++) {
+				this.playlistData[i].id = i
+			}
+			this.saved = false
+		},
+		updateChoice(index, value, imageFile) {
 
-            this.playlistData[index].graphic = value
-            this.playlistData[index].url = this.url + '/../images/' + imageFile
-            this.saved = false
+			this.playlistData[index].graphic = value
+			this.playlistData[index].url = this.url + '/../images/' + imageFile
+			this.saved = false
 
 
-        }
-    },
+		}
+	},
 
-    props: {
-        message: String,
-    }
+	props: {
+		message: String,
+	}
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->

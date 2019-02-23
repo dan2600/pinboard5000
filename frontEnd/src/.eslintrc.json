@@ -24,7 +24,6 @@
         ]
     },
     "parserOptions": {
-        "ecmaVersion": 2016,
-        "autoFix": false
+        "ecmaVersion": 2016
     }
 }

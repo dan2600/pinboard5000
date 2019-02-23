@@ -5,21 +5,21 @@
 </template>
 <script>
 export default {
-		name: 'homePage',
-		data: function() {
-				return {
-						timeString: "00:00:00"
-				}
-		},
-		mounted: function() {
-				window.console.log()
-		},
-		methods: {},
-
-		props: {
-				message: String,
-
+	name: 'homePage',
+	data: function() {
+		return {
+			timeString: '00:00:00'
 		}
+	},
+	mounted: function() {
+		window.console.log()
+	},
+	methods: {},
+
+	props: {
+		message: String,
+
+	}
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->

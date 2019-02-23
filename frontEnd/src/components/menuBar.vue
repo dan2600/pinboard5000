@@ -18,7 +18,7 @@ export default {
 	data: function() {
 		return {
 			time: new Date(),
-			timeString: "00:00:00"
+			timeString: '00:00:00'
 		}
 	},
 	mounted: function() {
@@ -36,11 +36,11 @@ export default {
 
 				for (this.i = 0; this.i < 3; this.i++) {
 					if (this.theTime[this.i].length < 2) {
-						this.theTime[this.i] = "0" + this.theTime[this.i];
+						this.theTime[this.i] = '0' + this.theTime[this.i];
 					}
 				}
 
-				self.timeString = this.theTime[0] + ":" + this.theTime[1] + ":" + this.theTime[2];
+				self.timeString = this.theTime[0] + ':' + this.theTime[1] + ':' + this.theTime[2];
 
 
 

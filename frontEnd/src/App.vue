@@ -23,26 +23,26 @@ import scenes from './components/scenes.vue'
 import segments from './components/segments.vue'
 import fileupload from './components/fileupload.vue'
 export default {
-  name: 'app',
-  data:  function () {
-    return {
-    page:"home"
-  }
-  },
-  components: {
-    menuBar,
-    homePage,
-    playlist,
-    scenes,
-    segments,
-    fileupload,
+	name: 'app',
+	data:  function () {
+		return {
+			page:'home'
+		}
+	},
+	components: {
+		menuBar,
+		homePage,
+		playlist,
+		scenes,
+		segments,
+		fileupload,
 
-  },
-    methods: {
-    menuChanger: function(name){
-      this.page = name;
-    }
-  }
+	},
+	methods: {
+		menuChanger: function(name){
+			this.page = name;
+		}
+	}
 
 }
 </script>
